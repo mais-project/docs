@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ko" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; MAIS 0.0.1 문서</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="색인" href="../genindex.html" />
+    <link rel="search" title="검색" href="../search.html" />
+    <link rel="next" title="Tutorials" href="tutorials.html" />
+    <link rel="prev" title="MAIS User Guide" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> MAIS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start-guide">Quick Start Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pip">Pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pip-from-source">Pip from source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#from-source">From source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-containers">Docker containers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#faq">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="best-practices.html">Best Practices</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MAIS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/starthere/intro.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="이 표제에 대한 퍼머링크"></a></h1>
+<p id="dummy-header"><a class="reference external" href="https://github.com/NVIDIA/NeMo">NVIDIA NeMo</a> is a toolkit for building new state-of-the-art
+conversational AI models. NeMo has separate collections for Automatic Speech Recognition (ASR),
+Natural Language Processing (NLP), and Text-to-Speech (TTS) models. Each collection consists of
+prebuilt modules that include everything needed to train on your data.
+Every module can easily be customized, extended, and composed to create new conversational AI
+model architectures.</p>
+<p>Conversational AI architectures are typically large and require a lot of data and compute
+for training. NeMo uses <a class="reference external" href="https://www.pytorchlightning.ai/">PyTorch Lightning</a> for easy and performant multi-GPU/multi-node
+mixed-precision training.</p>
+<p><a class="reference external" href="https://catalog.ngc.nvidia.com/models?query=nemo&amp;orderBy=weightPopularDESC">Pre-trained NeMo models.</a></p>
+<div style="position: relative; padding-bottom: 3%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/wBgpMf_KQVw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div><p>For more information and questions, visit the <a class="reference external" href="https://github.com/NVIDIA/NeMo/discussions">NVIDIA NeMo Discussion Board</a>.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>Before you begin using NeMo, it’s assumed you meet the following prerequisites.</p>
+<ol class="arabic simple">
+<li><p>You have Python version 3.6, 3.7 or 3.8.</p></li>
+<li><p>You have Pytorch version 1.8.1.</p></li>
+<li><p>You have access to an NVIDIA GPU for training.</p></li>
+</ol>
+</section>
+<section id="quick-start-guide">
+<span id="id1"></span><h2>Quick Start Guide<a class="headerlink" href="#quick-start-guide" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>This NeMo Quick Start Guide is a starting point for users who want to try out NeMo; specifically, this guide enables users to quickly get started with the NeMo fundamentals by walking you through an example audio translator and voice swap.</p>
+<p>If you’re new to NeMo, the best way to get started is to take a look at the following tutorials:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/NVIDIA/NeMo/blob/stable/tutorials/Text_Classification_Sentiment_Analysis">Text Classification (Sentiment Analysis)</a> - demonstrates the Text Classification model using the NeMo NLP collection.</p></li>
+<li><p><a class="reference external" href="https://github.com/NVIDIA/NeMo/blob/stable/tutorials/00_NeMo_Primer.ipynb">NeMo Primer</a> - introduces NeMo, PyTorch Lightning, and OmegaConf, and shows how to use, modify, save, and restore NeMo models.</p></li>
+<li><p><a class="reference external" href="https://github.com/NVIDIA/NeMo/blob/stable/tutorials/01_NeMo_Models.ipynb">NeMo Models</a> - explains the fundamental concepts of the NeMo model.</p></li>
+<li><p><a class="reference external" href="https://github.com/NVIDIA/NeMo/blob/stable/tutorials/NeMo_voice_swap_app.ipynb">NeMo voice swap demo</a> - demonstrates how to swap a voice in the audio fragment with a computer generated one using NeMo.</p></li>
+</ul>
+<p>Below we is the code snippet of Audio Translator application.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import NeMo and it&#39;s ASR, NLP and TTS collections</span>
+<span class="kn">import</span> <span class="nn">nemo</span>
+<span class="c1"># Import Speech Recognition collection</span>
+<span class="kn">import</span> <span class="nn">nemo.collections.asr</span> <span class="k">as</span> <span class="nn">nemo_asr</span>
+<span class="c1"># Import Natural Language Processing colleciton</span>
+<span class="kn">import</span> <span class="nn">nemo.collections.nlp</span> <span class="k">as</span> <span class="nn">nemo_nlp</span>
+<span class="c1"># Import Speech Synthesis collection</span>
+<span class="kn">import</span> <span class="nn">nemo.collections.tts</span> <span class="k">as</span> <span class="nn">nemo_tts</span>
+
+<span class="c1"># Next, we instantiate all the necessary models directly from NVIDIA NGC</span>
+<span class="c1"># Speech Recognition model - QuartzNet trained on Russian part of MCV 6.0</span>
+<span class="n">quartznet</span> <span class="o">=</span> <span class="n">nemo_asr</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">EncDecCTCModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;stt_ru_quartznet15x5&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+<span class="c1"># Neural Machine Translation model</span>
+<span class="n">nmt_model</span> <span class="o">=</span> <span class="n">nemo_nlp</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">MTEncDecModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;nmt_ru_en_transformer6x6&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+<span class="c1"># Spectrogram generator which takes text as an input and produces spectrogram</span>
+<span class="n">spectrogram_generator</span> <span class="o">=</span> <span class="n">nemo_tts</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FastPitchModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;tts_en_fastpitch&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+<span class="c1"># Vocoder model which takes spectrogram and produces actual audio</span>
+<span class="n">vocoder</span> <span class="o">=</span> <span class="n">nemo_tts</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">HifiGanModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;tts_hifigan&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+<span class="c1"># Transcribe an audio file</span>
+<span class="c1"># IMPORTANT: The audio must be mono with 16Khz sampling rate</span>
+<span class="c1"># Get example from: https://nemo-public.s3.us-east-2.amazonaws.com/mcv-samples-ru/common_voice_ru_19034087.wav</span>
+<span class="n">russian_text</span> <span class="o">=</span> <span class="n">quartznet</span><span class="o">.</span><span class="n">transcribe</span><span class="p">([</span><span class="s1">&#39;Path_to_audio_file&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">russian_text</span><span class="p">)</span>
+<span class="c1"># You should see russian text here. Let&#39;s translate it to English</span>
+<span class="n">english_text</span> <span class="o">=</span> <span class="n">nmt_model</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">russian_text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">english_text</span><span class="p">)</span>
+<span class="c1"># After this you should see English translation</span>
+<span class="c1"># Let&#39;s convert it into audio</span>
+<span class="c1"># A helper function which combines FastPitch and HiFiGAN to go directly from</span>
+<span class="c1"># text to audio</span>
+<span class="k">def</span> <span class="nf">text_to_audio</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+  <span class="n">parsed</span> <span class="o">=</span> <span class="n">spectrogram_generator</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+  <span class="n">spectrogram</span> <span class="o">=</span> <span class="n">spectrogram_generator</span><span class="o">.</span><span class="n">generate_spectrogram</span><span class="p">(</span><span class="n">tokens</span><span class="o">=</span><span class="n">parsed</span><span class="p">)</span>
+  <span class="n">audio</span> <span class="o">=</span> <span class="n">vocoder</span><span class="o">.</span><span class="n">convert_spectrogram_to_audio</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">spectrogram</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">audio</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cpu&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">audio</span> <span class="o">=</span> <span class="n">text_to_audio</span><span class="p">(</span><span class="n">english_text</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="이 표제에 대한 퍼머링크"></a></h2>
+<section id="pip">
+<h3>Pip<a class="headerlink" href="#pip" title="이 표제에 대한 퍼머링크"></a></h3>
+<p>Use this installation mode if you want the latest released version.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get update <span class="o">&amp;&amp;</span> apt-get install -y libsndfile1 ffmpeg
+pip install Cython
+pip install nemo_toolkit<span class="o">[</span>all<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="pip-from-source">
+<h3>Pip from source<a class="headerlink" href="#pip-from-source" title="이 표제에 대한 퍼머링크"></a></h3>
+<p>Use this installation mode if you want the version from a particular GitHub branch (for example, <code class="docutils literal notranslate"><span class="pre">main</span></code>).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get update <span class="o">&amp;&amp;</span> apt-get install -y libsndfile1 ffmpeg
+pip install Cython
+python -m pip install git+https://github.com/NVIDIA/NeMo.git@<span class="o">{</span>BRANCH<span class="o">}</span><span class="c1">#egg=nemo_toolkit[all]</span>
+<span class="c1"># For v1.0.2, replace {BRANCH} with v1.0.2 like so:</span>
+<span class="c1"># python -m pip install git+https://github.com/NVIDIA/NeMo.git@v1.0.2#egg=nemo_toolkit[all]</span>
+</pre></div>
+</div>
+</section>
+<section id="from-source">
+<h3>From source<a class="headerlink" href="#from-source" title="이 표제에 대한 퍼머링크"></a></h3>
+<p>Use this installation mode if you are contributing to NeMo.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get update <span class="o">&amp;&amp;</span> apt-get install -y libsndfile1 ffmpeg
+git clone https://github.com/NVIDIA/NeMo
+<span class="nb">cd</span> NeMo
+./reinstall.sh
+</pre></div>
+</div>
+</section>
+<section id="docker-containers">
+<h3>Docker containers<a class="headerlink" href="#docker-containers" title="이 표제에 대한 퍼머링크"></a></h3>
+<p>To build a nemo container with Dockerfile from a branch,  please run</p>
+<p>If you chose to work with the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch, we recommend using <a class="reference external" href="https://ngc.nvidia.com/containers/nvidia:pytorch/tags">NVIDIA’s PyTorch container version 21.05-py3</a>, then install from GitHub.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --gpus all -it --rm -v &lt;nemo_github_folder&gt;:/NeMo --shm-size<span class="o">=</span>8g <span class="se">\</span>
+-p <span class="m">8888</span>:8888 -p <span class="m">6006</span>:6006 --ulimit <span class="nv">memlock</span><span class="o">=</span>-1 --ulimit <span class="se">\</span>
+<span class="nv">stack</span><span class="o">=</span><span class="m">67108864</span> --device<span class="o">=</span>/dev/snd nvcr.io/nvidia/pytorch:21.05-py3
+</pre></div>
+</div>
+</section>
+</section>
+<section id="faq">
+<h2>FAQ<a class="headerlink" href="#faq" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>Have a look at our <a class="reference external" href="https://github.com/NVIDIA/NeMo/discussions">discussions board</a> and feel free to post a question or start a discussion.</p>
+</section>
+<section id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>We welcome community contributions! Refer to the <a class="reference external" href="https://github.com/NVIDIA/NeMo/blob/stable/CONTRIBUTING.md">CONTRIBUTING.md</a>  file for the process.</p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>NeMo is under <a class="reference external" href="https://github.com/NVIDIA/NeMo/blob/stable/LICENSE">Apache 2.0 license</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="MAIS User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 저작권 2021, MAIS.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

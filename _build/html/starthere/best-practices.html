@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ko" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Best Practices &mdash; MAIS 0.0.1 문서</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="색인" href="../genindex.html" />
+    <link rel="search" title="검색" href="../search.html" />
+    <link rel="prev" title="Tutorials" href="tutorials.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> MAIS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Best Practices</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#why-nemo">Why NeMo?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nemo-pytorch-lightning-and-hydra">NeMo, PyTorch Lightning, And Hydra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-optimized-pretrained-models-with-nemo">Using Optimized Pretrained Models With NeMo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#asr-guidance">ASR Guidance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-augmentation">Data Augmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#speech-data-explorer">Speech Data Explorer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-kaldi-formatted-data">Using Kaldi Formatted Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-speech-command-recognition-task-for-asr-models">Using Speech Command Recognition Task For ASR Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nlp-fine-tuning-bert">NLP Fine-Tuning BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biomegatron-medical-bert">BioMegatron Medical BERT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#efficient-training-with-nemo">Efficient Training With NeMo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-mixed-precision">Using Mixed Precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-gpu-training">Multi-GPU Training</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#recommendations-for-optimization-and-faqs">Recommendations For Optimization And FAQs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MAIS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Best Practices</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/starthere/best-practices.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="best-practices">
+<span id="id1"></span><h1>Best Practices<a class="headerlink" href="#best-practices" title="이 표제에 대한 퍼머링크"></a></h1>
+<p>The NVIDIA NeMo Toolkit is available on GitHub as <a class="reference external" href="https://github.com/NVIDIA/NeMo">open source</a> as well as
+a <a class="reference external" href="https://ngc.nvidia.com/catalog/containers/nvidia:nemo">Docker container on NGC</a>. It’s assumed the user has
+already installed NeMo by following the <span class="xref std std-ref">quick-start-guide</span> instructions.</p>
+<p>The conversational AI pipeline consists of three major stages:</p>
+<ul class="simple">
+<li><p>Automatic Speech Recognition (ASR)</p></li>
+<li><p>Natural Language Processing (NLP) or Natural Language Understanding (NLU)</p></li>
+<li><p>Text-to-Speech (TTS) or voice synthesis</p></li>
+</ul>
+<p>As you talk to a computer, the ASR phase converts the audio signal into text, the NLP stage interprets the question
+and generates a smart response, and finally the TTS phase converts the text into speech signals to generate audio for
+the user. The toolkit enables development and training of deep learning models involved in conversational AI and easily
+chain them together.</p>
+<section id="why-nemo">
+<h2>Why NeMo?<a class="headerlink" href="#why-nemo" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>Deep learning model development for conversational AI is complex. It involves defining, building, and training several
+models in specific domains; experimenting several times to get high accuracy, fine tuning on multiple tasks and domain
+specific data, ensuring training performance and making sure the models are ready for deployment to inference applications.
+Neural modules are logical blocks of AI applications which take some typed inputs and produce certain typed outputs. By
+separating a model into its essential components in a building block manner, NeMo helps researchers develop state-of-the-art
+accuracy models for domain specific data faster and easier.</p>
+<p>Collections of modules for core tasks as well as specific to speech recognition, natural language, speech synthesis help
+develop modular, flexible, and reusable pipelines.</p>
+<p>A neural module’s inputs/outputs have a neural type, that describes the semantics, the axis order and meaning, and the dimensions
+of the input/output tensors. This typing allows neural modules to be safely chained together to build models for applications.</p>
+<p>NeMo can be used to train new models or perform transfer learning on existing pre-trained models. Pre-trained weights per module
+(such as encoder, decoder) help accelerate model training for domain specific data.</p>
+<p>ASR, NLP and TTS pre-trained models are trained on multiple datasets (including some languages such as Mandarin) and optimized
+for high accuracy. They can be used for transfer learning as well.</p>
+<p>NeMo supports developing models that work with Mandarin Chinese data. Tutorials help users train or fine tune models for
+conversational AI with the Mandarin Chinese language. The export method provided in NeMo makes it easy to transform a trained
+model into inference ready format for deployment.</p>
+<p>A key area of development in the toolkit is interoperability with other tools used by speech researchers. Data layer for Kaldi
+compatibility is one such example.</p>
+</section>
+<section id="nemo-pytorch-lightning-and-hydra">
+<h2>NeMo, PyTorch Lightning, And Hydra<a class="headerlink" href="#nemo-pytorch-lightning-and-hydra" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>Conversational AI architectures are typically very large and require a lot of data and compute for training. NeMo uses
+<a class="reference external" href="https://github.com/PyTorchLightning/pytorch-lightning">Pytorch Lightning</a> for easy and performant multi-GPU/multi-node
+mixed precision training.</p>
+<p>Pytorch Lightning is a high-performance PyTorch wrapper that organizes PyTorch code, scales model training, and reduces
+boilerplate. PyTorch Lightning has two main components, the <code class="docutils literal notranslate"><span class="pre">LightningModule</span></code> and the Trainer. The <code class="docutils literal notranslate"><span class="pre">LightningModule</span></code> is
+used to organize PyTorch code so that deep learning experiments can be easily understood and reproduced. The Pytorch Lightning
+Trainer is then able to take the <code class="docutils literal notranslate"><span class="pre">LightningModule</span></code> and automate everything needed for deep learning training.</p>
+<p>NeMo models are LightningModules that come equipped with all supporting infrastructure for training and reproducibility. This
+includes the deep learning model architecture, data preprocessing, optimizer, check-pointing and experiment logging. NeMo
+models, like LightningModules, are also PyTorch modules and are fully compatible with the broader PyTorch ecosystem. Any NeMo
+model can be taken and plugged into any PyTorch workflow.</p>
+<p>Configuring conversational AI applications is difficult due to the need to bring together many different Python libraries into
+one end-to-end system. NeMo uses Hydra for configuring both NeMo models and the PyTorch Lightning Trainer. <a class="reference external" href="https://github.com/facebookresearch/hydra">Hydra</a>
+is a flexible solution that makes it easy to configure all of these libraries from a configuration file or from the command-line.</p>
+<p>Every NeMo model has an example configuration file and a corresponding script that contains all configurations needed for training
+to state-of-the-art accuracy. NeMo models have the same look and feel so that it is easy to do conversational AI research across
+multiple domains.</p>
+</section>
+<section id="using-optimized-pretrained-models-with-nemo">
+<h2>Using Optimized Pretrained Models With NeMo<a class="headerlink" href="#using-optimized-pretrained-models-with-nemo" title="이 표제에 대한 퍼머링크"></a></h2>
+<p><a class="reference external" href="https://ngc.nvidia.com/catalog">NVIDIA GPU Cloud (NGC)</a> is a software repository that has containers and models optimized
+for deep learning. NGC hosts many conversational AI models developed with NeMo that have been trained to state-of-the-art accuracy
+on large datasets. NeMo models on NGC can be automatically downloaded and used for transfer learning tasks. Pretrained models
+are the quickest way to get started with conversational AI on your own data. NeMo has many <a class="reference external" href="https://github.com/NVIDIA/NeMo/tree/main/examples">example scripts</a>
+and <a class="reference external" href="https://github.com/NVIDIA/NeMo#tutorials">Jupyter Notebook tutorials</a> showing step-by-step how to fine-tune pretrained NeMo
+models on your own domain-specific datasets.</p>
+<p>For BERT based models, the model weights provided are ready for
+downstream NLU tasks. For speech models, it can be helpful to start with a pretrained model and then continue pretraining on your
+own domain-specific data. Jasper and QuartzNet base model pretrained weights have been known to be very efficient when used as
+base models. For an easy to follow guide on transfer learning and building domain specific ASR models, you can follow this <a class="reference external" href="https://developer.nvidia.com/blog/how-to-build-domain-specific-automatic-speech-recognition-models-on-gpus/">blog</a>.
+All pre-trained NeMo models can be found on the <a class="reference external" href="https://ngc.nvidia.com/catalog/collections?orderBy=scoreDESC&amp;pageNumber=0&amp;query=NeMo&amp;quickFilter=&amp;filters=">NGC NeMo Collection</a>. Everything needed to quickly get started
+with NeMo ASR, NLP, and TTS models is there.</p>
+<p>Pre-trained models are packaged as a <code class="docutils literal notranslate"><span class="pre">.nemo</span></code> file and contain the PyTorch checkpoint along with everything needed to use the model.
+NeMo models are trained to state-of-the-art accuracy and trained on multiple datasets so that they are robust to small differences
+in data. NeMo contains a large variety of models such as speaker identification and Megatron BERT and the best models in speech and
+language are constantly being added as they become available. NeMo is the premier toolkit for conversational AI model building and
+training.</p>
+<p>For a list of supported models, refer to the <a class="reference internal" href="tutorials.html#tutorials"><span class="std std-ref">Tutorials</span></a> section.</p>
+</section>
+<section id="asr-guidance">
+<h2>ASR Guidance<a class="headerlink" href="#asr-guidance" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>This section is to help guide your decision making by answering our most asked ASR questions.</p>
+<p><strong>Q: Is there a way to add domain specific vocabulary in NeMo? If so, how do I do that?</strong>
+A: QuartzNet and Jasper models are character-based. So pretrained models we provide for these two output lowercase English
+letters and ‘. Users can re-retrain them on vocabulary with upper case letters and punctuation symbols.</p>
+<p><strong>Q: When training, there are “Reference” lines and “Decoded” lines that are printed out. It seems like the reference line should
+be the “truth” line and the decoded line should be what the ASR is transcribing. Why do I see that even the reference lines do not
+appear to be correct?</strong>
+A: Because our pre-trained models can only output lowercase letters and apostrophe, everything else is dropped. So the model will
+transcribe 10 as ten. The best way forward is to prepare the training data first by transforming everything to lowercase and convert
+the numbers from digit representation to word representation using a simple library such as <a class="reference external" href="https://pypi.org/project/inflect/">inflect</a>. Then, add the uppercase letters
+and punctuation back using the NLP punctuation model. Here is an example of how this is incorporated: <a class="reference external" href="https://github.com/NVIDIA/NeMo/blob/stable/tutorials/VoiceSwapSample.ipynb">NeMo voice swap demo</a>.</p>
+<p><strong>Q: What languages are supported in NeMo currently?</strong>
+A: Along with English, we provide pre-trained models for Zh, Es, Fr, De, Ru, It, Ca and Pl languages.
+For more information, see <a class="reference external" href="https://ngc.nvidia.com/catalog/collections/nvidia:nemo_asr">NeMo Speech Models</a>.</p>
+</section>
+<section id="data-augmentation">
+<h2>Data Augmentation<a class="headerlink" href="#data-augmentation" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>Data augmentation in ASR is invaluable. It comes at the cost of increased training time if samples are augmented during training
+time. To save training time, it is recommended to pre-process the dataset offline for a one time preprocessing cost and then train
+the dataset on this augmented training set.</p>
+<p>For example, processing a single sample involves:</p>
+<ul class="simple">
+<li><p>Speed perturbation</p></li>
+<li><p>Time stretch perturbation (sample level)</p></li>
+<li><p>Noise perturbation</p></li>
+<li><p>Impulse perturbation</p></li>
+<li><p>Time stretch augmentation (batch level, neural module)</p></li>
+</ul>
+<p>A simple tutorial guides users on how to use these utilities provided in <a class="reference external" href="https://github.com/NVIDIA/NeMo/blob/stable/tutorials/asr/Online_Noise_Augmentation.ipynb">GitHub: NeMo</a>.</p>
+</section>
+<section id="speech-data-explorer">
+<h2>Speech Data Explorer<a class="headerlink" href="#speech-data-explorer" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>Speech data explorer is a <a class="reference external" href="https://plotly.com/dash/">Dash-based tool</a> for interactive exploration of ASR/TTS datasets.</p>
+<p>Speech data explorer collects:</p>
+<ul class="simple">
+<li><p>dataset statistics (alphabet, vocabulary, and duration-based histograms)</p></li>
+<li><p>navigation across datasets (sorting and filtering)</p></li>
+<li><p>inspections of individual utterances (waveform, spectrogram, and audio player)</p></li>
+<li><p>errors analysis (word error rate, character error rate, word match rate, mean word accuracy, and diff)</p></li>
+</ul>
+<p>In order to use the tool, it needs to be installed separately. Perform the steps <a class="reference external" href="https://github.com/NVIDIA/NeMo/tree/main/tools/speech_data_explorer">here</a> to install speech data explorer.</p>
+</section>
+<section id="using-kaldi-formatted-data">
+<h2>Using Kaldi Formatted Data<a class="headerlink" href="#using-kaldi-formatted-data" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>The <a class="reference external" href="https://kaldi-asr.org/">Kaldi Speech Recognition Toolkit</a> project began in 2009 at <cite>Johns Hopkins University &lt;https://www.jhu.edu/&gt;</cite>. It is a toolkit written in C++. If
+researchers have used Kaldi and have datasets that are formatted to be used with the toolkit; they can use NeMo to develop models
+based on that data.</p>
+<p>To load Kaldi-formatted data, you can simply use <code class="docutils literal notranslate"><span class="pre">KaldiFeatureDataLayer</span></code> instead of <code class="docutils literal notranslate"><span class="pre">AudioToTextDataLayer</span></code>. The <code class="docutils literal notranslate"><span class="pre">KaldiFeatureDataLayer</span></code>
+takes in the argument <code class="docutils literal notranslate"><span class="pre">kaldi_dir</span></code> instead of a <code class="docutils literal notranslate"><span class="pre">manifest_filepath</span></code>. The <code class="docutils literal notranslate"><span class="pre">manifest_filepath</span></code> argument should be set to the directory
+that contains the files <code class="docutils literal notranslate"><span class="pre">feats.scp</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
+</section>
+<section id="using-speech-command-recognition-task-for-asr-models">
+<h2>Using Speech Command Recognition Task For ASR Models<a class="headerlink" href="#using-speech-command-recognition-task-for-asr-models" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>Speech Command Recognition is the task of classifying an input audio pattern into a set of discrete classes. It is a subset of ASR,
+sometimes referred to as Key Word Spotting, in which a model is constantly analyzing speech patterns to detect certain <code class="docutils literal notranslate"><span class="pre">action</span></code> classes.</p>
+<p>Upon detection of these commands, a specific action can be taken. An example Jupyter notebook provided in NeMo shows how to train a
+QuartzNet model with a modified decoder head trained on a speech commands dataset.</p>
+<div class="admonition note">
+<p class="admonition-title">참고</p>
+<p>It is preferred that you use absolute paths to <code class="docutils literal notranslate"><span class="pre">data_dir</span></code> when preprocessing the dataset.</p>
+</div>
+</section>
+<section id="nlp-fine-tuning-bert">
+<h2>NLP Fine-Tuning BERT<a class="headerlink" href="#nlp-fine-tuning-bert" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>BERT, or Bidirectional Encoder Representations from Transformers, is a neural approach to pre-train language representations which
+obtains near state-of-the-art results on a wide array of Natural Language Processing (NLP) tasks, including the GLUE benchmark and
+SQuAD Question &amp; Answering dataset.</p>
+<p>BERT model checkpoints (<a class="reference external" href="https://ngc.nvidia.com/catalog/models/nvidia:bertlargeuncasedfornemo">BERT-large-uncased</a> and <a class="reference external" href="https://ngc.nvidia.com/catalog/models/nvidia:bertbaseuncasedfornemo">BERT-base-uncased</a>) are provided can be used for either fine tuning BERT on your custom
+dataset, or fine tuning downstream tasks, including GLUE benchmark tasks, Question &amp; Answering tasks, Joint Intent &amp; Slot detection,
+Punctuation and Capitalization, Named Entity Recognition, and Speech Recognition post processing model to correct mistakes.</p>
+<div class="admonition note">
+<p class="admonition-title">참고</p>
+<p>Almost all NLP examples also support RoBERTa and ALBERT models for downstream fine-tuning tasks (see the list of all</p>
+</div>
+<p>supported models by calling <code class="docutils literal notranslate"><span class="pre">nemo.collections.nlp.modules.common.lm_utils.get_pretrained_lm_models_list()</span></code>. The user needs to specify
+the name of the model desired while running the example scripts.</p>
+</section>
+<section id="biomegatron-medical-bert">
+<h2>BioMegatron Medical BERT<a class="headerlink" href="#biomegatron-medical-bert" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>BioMegatron is a large language model (Megatron-LM) trained on larger domain text corpus (PubMed abstract + full-text-commercial).
+It achieves state-of-the-art results for certain tasks such as Relationship Extraction, Named Entity Recognition and Question &amp;
+Answering. Follow these tutorials to learn how to train and fine tune BioMegatron; pretrained models are provided on NGC:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/NVIDIA/NeMo/blob/stable/tutorials/nlp/Relation_Extraction-BioMegatron.ipynb">Relation Extraction BioMegatron</a></p></li>
+<li><p><a class="reference external" href="https://github.com/NVIDIA/NeMo/blob/stable/tutorials/nlp/Token_Classification-BioMegatron.ipynb">Token Classification BioMegatron</a></p></li>
+</ul>
+</section>
+<section id="efficient-training-with-nemo">
+<h2>Efficient Training With NeMo<a class="headerlink" href="#efficient-training-with-nemo" title="이 표제에 대한 퍼머링크"></a></h2>
+<section id="using-mixed-precision">
+<h3>Using Mixed Precision<a class="headerlink" href="#using-mixed-precision" title="이 표제에 대한 퍼머링크"></a></h3>
+<p>Mixed precision accelerates training speed while protecting against noticeable loss. Tensor Cores is a specific hardware unit that
+comes starting with the Volta and Turing architectures to accelerate large matrix to matrix multiply-add operations by operating them
+on half precision inputs and returning the result in full precision.</p>
+<p>Neural networks which usually use massive matrix multiplications can be significantly sped up with mixed precision and Tensor Cores.
+However, some neural network layers are numerically more sensitive than others. Apex AMP is an NVIDIA library that maximizes the
+benefit of mixed precision and Tensor Cores usage for a given network.</p>
+</section>
+<section id="multi-gpu-training">
+<h3>Multi-GPU Training<a class="headerlink" href="#multi-gpu-training" title="이 표제에 대한 퍼머링크"></a></h3>
+<p>This section is to help guide your decision making by answering our most asked multi-GPU training questions.</p>
+<p><strong>Q: Why is multi-GPU training preferred over other types of training?</strong>
+A: Multi-GPU training can reduce the total training time by distributing the workload onto multiple compute instances. This is
+particularly important for large neural networks which would otherwise take weeks to train until convergence. Since NeMo supports
+multi-GPU training, no code change is needed to move from single to multi-GPU training, only a slight change in your launch command
+is required.</p>
+<p><strong>Q: What are the advantages of mixed precision training?</strong>
+A: Mixed precision accelerates training speed while protecting against noticeable loss in precision. Tensor Cores is a specific
+hardware unit that comes starting with the Volta and Turing architectures to accelerate large matrix multiply-add operations by
+operating on half precision inputs and returning the result in full precision in order to prevent loss in precision. Neural
+networks which usually use massive matrix multiplications can be significantly sped up with mixed precision and Tensor Cores.
+However, some neural network layers are numerically more sensitive than others. Apex AMP is a NVIDIA library that maximizes the
+benefit of mixed precision and Tensor Core usage for a given network.</p>
+<p><strong>Q: What is the difference between multi-GPU and multi-node training?</strong>
+A: Multi-node is an abstraction of multi-GPU training, which requires a distributed compute cluster, where each node can have multiple
+GPUs. Multi-node training is needed to scale training beyond a single node to large amounts of GPUs.</p>
+<p>From the framework perspective, nothing changes from moving to multi-node training. However, a master address and port needs to be set
+up for inter-node communication. Multi-GPU training will then be launched on each node with passed information. You might also consider
+the underlying inter-node network topology and type to achieve full performance, such as HPC-style hardware such as NVLink, InfiniBand
+networking, or Ethernet.</p>
+</section>
+</section>
+<section id="recommendations-for-optimization-and-faqs">
+<h2>Recommendations For Optimization And FAQs<a class="headerlink" href="#recommendations-for-optimization-and-faqs" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>This section is to help guide your decision making by answering our most asked NeMo questions.</p>
+<p><strong>Q: Are there areas where performance can be increased?</strong>
+A: You should try using mixed precision for improved performance. Note that typically when using mixed precision, memory consumption
+is decreased and larger batch sizes could be used to further improve the performance.</p>
+<p>When fine-tuning ASR models on your data, it is almost always possible to take advantage of NeMo’s pre-trained modules. Even if you
+have a different target vocabulary, or even a different language; you can still try starting with pre-trained weights from Jasper or
+QuartzNet <code class="docutils literal notranslate"><span class="pre">encoder</span></code> and only adjust the <code class="docutils literal notranslate"><span class="pre">decoder</span></code> for your needs.</p>
+<p><strong>Q: What is the recommended sampling rate for ASR?</strong>
+A: The released models are based on 16 KHz audio, therefore, ensure you use models with 16 KHz audio. Reduced performance should be
+expected for any audio that is up-sampled from a sampling frequency less than 16 KHz data.</p>
+<p><strong>Q: How do we use this toolkit for audio with different types of compression and frequency than the training domain for ASR?</strong>
+A: You have to match the compression and frequency.</p>
+<p><strong>Q: How do you replace the 6-gram out of the ASR model with a custom language model? What is the language format supported in NeMo?</strong>
+A: NeMo’s Beam Search decoder with Levenberg-Marquardt (LM) neural module supports the KenLM language model.</p>
+<ul class="simple">
+<li><p>You should retrain the KenLM language model on your own dataset. Refer to <a class="reference external" href="https://github.com/kpu/kenlm#kenlm">KenLM’s documentation</a>.</p></li>
+<li><p>If you want to use a different language model, other than KenLM, you will need to implement a corresponding decoder module.</p></li>
+<li><p>Transformer-XL example is present in OS2S. It would need to be updated to work with NeMo. <a class="reference external" href="https://github.com/NVIDIA/OpenSeq2Seq/tree/master/external_lm_rescore">Here is the code</a>.</p></li>
+</ul>
+<p><strong>Q: How do I use text-to-speech (TTS)?</strong>
+A:
+- Obtain speech data ideally at 22050 Hz or alternatively at a higher sample rate and then down sample to 22050 Hz.</p>
+<blockquote>
+<div><ul>
+<li><dl>
+<dt>If less than 22050 Hz and at least 16000 Hz:</dt><dd><ul class="simple">
+<li><p>Retrain WaveGlow on your own dataset.</p></li>
+<li><p>Tweak the spectrogram generation parameters, namely the <code class="docutils literal notranslate"><span class="pre">window_size</span></code> and the <code class="docutils literal notranslate"><span class="pre">window_stride</span></code> for their fourier</p></li>
+</ul>
+<p>transforms.</p>
+</dd>
+</dl>
+</li>
+<li><p>For below 16000 Hz, look into obtaining new data.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>In terms of bitrate/quantization, the general advice is the higher the better. We have not experimented enough to state how much
+this impacts quality.</p></li>
+<li><p>For the amount of data, again the more the better, and the more diverse in terms of phonemes the better. Aim for around 20 hours
+of speech after filtering for silences and non-speech audio.</p></li>
+<li><p>Most open speech datasets are in ~10 second format so training spectrogram generators on audio on the order of 10s - 20s per sample is known
+to work. Additionally, the longer the speech samples, the more difficult it will be to train them.</p></li>
+<li><p>Audio files should be clean. There should be little background noise or music. Data recorded from a studio mic is likely to be easier
+to train compared to data captured using a phone.</p></li>
+<li><p>To ensure pronunciation of words are accurate; the technical challenge is related to the dataset, text to phonetic spelling is
+required, use phonetic alphabet (notation) that has the name correctly pronounced.</p></li>
+<li><dl class="simple">
+<dt>Here are some example parameters you can use to train spectrogram generators:</dt><dd><ul>
+<li><p>use single speaker dataset</p></li>
+<li><p>Use AMP level O0</p></li>
+<li><p>Trim long silences in the beginning and end</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer=&quot;adam&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beta1</span> <span class="pre">=</span> <span class="pre">0.9</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beta2</span> <span class="pre">=</span> <span class="pre">0.999</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lr=0.001</span> <span class="pre">(constant)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">amp_opt_level=&quot;O0&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weight_decay=1e-6</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_size=48</span> <span class="pre">(per</span> <span class="pre">GPU)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trim_silence=True</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="이 표제에 대한 퍼머링크"></a></h2>
+<p>Ensure you are familiar with the following resources for NeMo.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Developer blogs</dt><dd><ul>
+<li><p><a class="reference external" href="https://developer.nvidia.com/blog/how-to-build-domain-specific-automatic-speech-recognition-models-on-gpus/">How to Build Domain Specific Automatic Speech Recognition Models on GPUs</a></p></li>
+<li><p><a class="reference external" href="https://developer.nvidia.com/blog/develop-smaller-speech-recognition-models-with-nvidias-nemo-framework/">Develop Smaller Speech Recognition Models with NVIDIA’s NeMo Framework</a></p></li>
+<li><p><a class="reference external" href="https://developer.nvidia.com/blog/neural-modules-for-speech-language-models/">Neural Modules for Fast Development of Speech and Language Models</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Domain specific, transfer learning, Docker container with Jupyter Notebooks</dt><dd><ul>
+<li><p><a class="reference external" href="https://ngc.nvidia.com/catalog/containers/nvidia:nemo_asr_app_img">Domain Specific NeMo ASR Application</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 저작권 2021, MAIS.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

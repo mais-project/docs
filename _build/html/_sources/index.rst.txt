@@ -1,20 +1,11 @@
-.. mais documentation master file, created by
-   sphinx-quickstart on Thu Dec  2 12:40:58 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to mais's documentation!
-================================
+MAIS User Guide
+======================
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Getting Started
+   :name: starthere
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   starthere/intro
+   starthere/tutorials
+   starthere/best-practices

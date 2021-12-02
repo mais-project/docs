@@ -7,5 +7,3 @@ MAIS User Guide
    :name: starthere
 
    starthere/intro
-   starthere/tutorials
-   starthere/best-practices
